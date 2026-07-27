@@ -1,0 +1,19 @@
+{
+    "name": "stripe_payment",
+    "display_name": "Stripe Payment Gateway",
+    "description": "Integración con Stripe para procesar pagos con tarjetas de crédito/débito",
+    "version": "1.0.0",
+    "author": "Your Company",
+    "author_url": "https://yourcompany.com",
+    "namespace": "Plugins\\PaymentGateways\\Stripe",
+    "main_class": "Plugins\\PaymentGateways\\Stripe\\StripePlugin",
+    "requires_php": "8.1",
+    "dependencies": [],
+    "config": {
+        "public_key": "",
+        "secret_key": "",
+        "webhook_secret": "",
+        "currency": "USD",
+        "test_mode": true
+    }
+}

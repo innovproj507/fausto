@@ -1,0 +1,71 @@
+# Dependencias
+/vendor/
+
+# Variables de entorno
+.env
+.env.backup
+.env.local
+.env.*.local
+
+# Storage (cache, logs, sesiones)
+/storage/cache/*
+/storage/logs/*
+/storage/sessions/*
+!/storage/cache/.gitkeep
+!/storage/logs/.gitkeep
+!/storage/sessions/.gitkeep
+
+# Uploads
+/storage/uploads/*
+/public/uploads/*
+!/storage/uploads/.gitkeep
+!/public/uploads/.gitkeep
+
+# Archivos SQL (dumps de base de datos)
+*.sql
+
+# Archivos Excel/datos
+*.xlsx
+*.xls
+*.csv
+
+# IDE y editores
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Sistema operativo
+Thumbs.db
+Desktop.ini
+.DS_Store
+.DS_Store?
+._*
+
+# PHP
+*.phpunit.result.cache
+.phpunit.cache/
+phpstan.neon
+phpunit.xml
+
+# Composer
+composer.phar
+
+# Node (por si se agrega frontend)
+/node_modules/
+npm-debug.log
+yarn-error.log
+
+# Documentación generada por AI/setup
+ACCESS_GUIDE.md
+ADMIN_ACCESS.md
+ADMIN_READY.md
+AUTH_ENABLED.md
+DATABASE_READY.md
+FIX_APPLIED.md
+QUICKSTART.md

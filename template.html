@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferretería El Martillo - Todo para tu Construcción</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#DC2626',
+                        secondary: '#1F2937'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-white">
+    <!-- Top Bar -->
+    <div class="bg-secondary text-white text-sm">
+        <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+            <div class="flex gap-6">
+                <span><i class="fas fa-phone mr-2"></i>+507 6000-0000</span>
+                <span><i class="fas fa-envelope mr-2"></i>ventas@ferreteria.com</span>
+            </div>
+            <div class="flex gap-4">
+                <a href="#" class="hover:text-primary transition"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="hover:text-primary transition"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-primary transition"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div
+                        class="bg-primary text-white w-16 h-16 flex items-center justify-center rounded-lg font-bold text-2xl">
+                        <i class="fas fa-hammer"></i>
+                    </div>
+                    <div class="ml-3">
+                        <h1 class="text-2xl font-bold text-secondary">Ferretería</h1>
+                        <p class="text-sm text-gray-600">El Martillo</p>
+                    </div>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="hidden md:flex flex-1 max-w-xl mx-8">
+                    <div class="relative w-full">
+                        <input type="text" placeholder="Buscar productos..."
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary">
+                        <button
+                            class="absolute right-2 top-2 bg-primary text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- User Actions -->
+                <div class="flex items-center gap-4">
+                    <button class="hidden md:flex flex-col items-center text-secondary hover:text-primary transition">
+                        <i class="fas fa-user text-xl"></i>
+                        <span class="text-xs mt-1">Cuenta</span>
+                    </button>
+                    <button class="flex flex-col items-center text-secondary hover:text-primary transition relative">
+                        <i class="fas fa-heart text-xl"></i>
+                        <span class="text-xs mt-1">Favoritos</span>
+                        <span
+                            class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                    </button>
+                    <button onclick="toggleCart()"
+                        class="flex flex-col items-center text-secondary hover:text-primary transition relative">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span class="text-xs mt-1">Carrito</span>
+                        <span id="cartCount"
+                            class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Search -->
+            <div class="md:hidden mt-4">
+                <div class="relative">
+                    <input type="text" placeholder="Buscar productos..."
+                        class="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary">
+                    <button class="absolute right-2 top-2 text-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="bg-secondary text-white">
+            <div class="container mx-auto px-4">
+                <ul class="flex flex-wrap justify-center md:justify-start gap-1">
+                    <li><a href="#" class="block px-4 py-3 hover:bg-primary transition">Inicio</a></li>
+                    <li class="relative group">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary transition">
+                            Herramientas <i class="fas fa-chevron-down text-xs ml-1"></i>
+                        </a>
+                        <div
+                            class="hidden group-hover:block absolute bg-white text-secondary shadow-lg mt-0 py-2 w-48 rounded-b-lg">
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Manuales</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Eléctricas</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Medición</a>
+                        </div>
+                    </li>
+                    <li><a href="#" class="block px-4 py-3 hover:bg-primary transition">Construcción</a></li>
+                    <li><a href="#" class="block px-4 py-3 hover:bg-primary transition">Plomería</a></li>
+                    <li><a href="#" class="block px-4 py-3 hover:bg-primary transition">Eléctricos</a></li>
+                    <li><a href="#" class="block px-4 py-3 hover:bg-primary transition">Pinturas</a></li>
+                    <li><a href="#" class="block px-4 py-3 hover:bg-primary transition">Ofertas</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="bg-gradient-to-r from-secondary to-gray-700 text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4">Construye tus Sueños</h2>
+                    <p class="text-xl mb-6">Las mejores herramientas y materiales al mejor precio</p>
+                    <div class="flex gap-4">
+                        <button
+                            class="bg-primary hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition">
+                            Ver Ofertas
+                        </button>
+                        <button
+                            class="bg-white text-secondary hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition">
+                            Catálogo
+                        </button>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl">
+                        <i class="fas fa-tools text-9xl text-primary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="py-8 border-b">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="flex items-center gap-4">
+                    <i class="fas fa-shipping-fast text-4xl text-primary"></i>
+                    <div>
+                        <h3 class="font-bold text-secondary">Envío Rápido</h3>
+                        <p class="text-sm text-gray-600">En 24-48 horas</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <i class="fas fa-shield-alt text-4xl text-primary"></i>
+                    <div>
+                        <h3 class="font-bold text-secondary">Pago Seguro</h3>
+                        <p class="text-sm text-gray-600">100% Protegido</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <i class="fas fa-undo text-4xl text-primary"></i>
+                    <div>
+                        <h3 class="font-bold text-secondary">Devoluciones</h3>
+                        <p class="text-sm text-gray-600">30 días garantía</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <i class="fas fa-headset text-4xl text-primary"></i>
+                    <div>
+                        <h3 class="font-bold text-secondary">Soporte 24/7</h3>
+                        <p class="text-sm text-gray-600">Estamos para ti</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-secondary mb-8 text-center">Categorías Destacadas</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <div class="bg-white rounded-lg p-6 text-center hover:shadow-lg transition cursor-pointer group">
+                    <div
+                        class="bg-red-50 w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-4 group-hover:bg-primary transition">
+                        <i class="fas fa-hammer text-3xl text-primary group-hover:text-white"></i>
+                    </div>
+                    <h3 class="font-semibold text-secondary">Herramientas</h3>
+                </div>
+                <div class="bg-white rounded-lg p-6 text-center hover:shadow-lg transition cursor-pointer group">
+                    <div
+                        class="bg-red-50 w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-4 group-hover:bg-primary transition">
+                        <i class="fas fa-wrench text-3xl text-primary group-hover:text-white"></i>
+                    </div>
+                    <h3 class="font-semibold text-secondary">Plomería</h3>
+                </div>
+                <div class="bg-white rounded-lg p-6 text-center hover:shadow-lg transition cursor-pointer group">
+                    <div
+                        class="bg-red-50 w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-4 group-hover:bg-primary transition">
+                        <i class="fas fa-bolt text-3xl text-primary group-hover:text-white"></i>
+                    </div>
+                    <h3 class="font-semibold text-secondary">Eléctricos</h3>
+                </div>
+                <div class="bg-white rounded-lg p-6 text-center hover:shadow-lg transition cursor-pointer group">
+                    <div
+                        class="bg-red-50 w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-4 group-hover:bg-primary transition">
+                        <i class="fas fa-paint-roller text-3xl text-primary group-hover:text-white"></i>
+                    </div>
+                    <h3 class="font-semibold text-secondary">Pinturas</h3>
+                </div>
+                <div class="bg-white rounded-lg p-6 text-center hover:shadow-lg transition cursor-pointer group">
+                    <div
+                        class="bg-red-50 w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-4 group-hover:bg-primary transition">
+                        <i class="fas fa-hard-hat text-3xl text-primary group-hover:text-white"></i>
+                    </div>
+                    <h3 class="font-semibold text-secondary">Seguridad</h3>
+                </div>
+                <div class="bg-white rounded-lg p-6 text-center hover:shadow-lg transition cursor-pointer group">
+                    <div
+                        class="bg-red-50 w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-4 group-hover:bg-primary transition">
+                        <i class="fas fa-toolbox text-3xl text-primary group-hover:text-white"></i>
+                    </div>
+                    <h3 class="font-semibold text-secondary">Almacenaje</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold text-secondary">Productos Destacados</h2>
+                <a href="#" class="text-primary hover:text-red-700 font-semibold">Ver Todos →</a>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Product Card 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-xl transition">
+                    <div class="relative overflow-hidden bg-gray-100 h-64 flex items-center justify-center">
+                        <i class="fas fa-drill text-8xl text-gray-300"></i>
+                        <span
+                            class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-semibold">-20%</span>
+                        <button
+                            class="absolute top-4 left-4 bg-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-sm text-gray-600 mb-1">Herramientas Eléctricas</p>
+                        <h3 class="font-semibold text-secondary mb-2 line-clamp-2">Taladro Percutor 650W con Maletín
+                        </h3>
+                        <div class="flex items-center mb-2">
+                            <div class="flex text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-sm text-gray-600 ml-2">(24)</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-gray-400 line-through text-sm">$89.99</span>
+                                <span class="text-2xl font-bold text-primary ml-2">$71.99</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCart('Taladro Percutor', 71.99)"
+                            class="w-full mt-4 bg-secondary text-white py-2 rounded-lg hover:bg-primary transition font-semibold">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-xl transition">
+                    <div class="relative overflow-hidden bg-gray-100 h-64 flex items-center justify-center">
+                        <i class="fas fa-hammer text-8xl text-gray-300"></i>
+                        <button
+                            class="absolute top-4 left-4 bg-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-sm text-gray-600 mb-1">Herramientas Manuales</p>
+                        <h3 class="font-semibold text-secondary mb-2 line-clamp-2">Juego de Martillos Profesional 3
+                            Piezas</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="flex text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="text-sm text-gray-600 ml-2">(18)</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-2xl font-bold text-primary">$34.99</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCart('Juego de Martillos', 34.99)"
+                            class="w-full mt-4 bg-secondary text-white py-2 rounded-lg hover:bg-primary transition font-semibold">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-xl transition">
+                    <div class="relative overflow-hidden bg-gray-100 h-64 flex items-center justify-center">
+                        <i class="fas fa-ruler-combined text-8xl text-gray-300"></i>
+                        <span
+                            class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Nuevo</span>
+                        <button
+                            class="absolute top-4 left-4 bg-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-sm text-gray-600 mb-1">Medición</p>
+                        <h3 class="font-semibold text-secondary mb-2 line-clamp-2">Nivel Láser Autonivelante 360°</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="flex text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-sm text-gray-600 ml-2">(12)</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-2xl font-bold text-primary">$129.99</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCart('Nivel Láser', 129.99)"
+                            class="w-full mt-4 bg-secondary text-white py-2 rounded-lg hover:bg-primary transition font-semibold">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-xl transition">
+                    <div class="relative overflow-hidden bg-gray-100 h-64 flex items-center justify-center">
+                        <i class="fas fa-paint-roller text-8xl text-gray-300"></i>
+                        <span
+                            class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-semibold">-15%</span>
+                        <button
+                            class="absolute top-4 left-4 bg-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-sm text-gray-600 mb-1">Pinturas</p>
+                        <h3 class="font-semibold text-secondary mb-2 line-clamp-2">Set Completo de Rodillos y Brochas
+                        </h3>
+                        <div class="flex items-center mb-2">
+                            <div class="flex text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="text-sm text-gray-600 ml-2">(31)</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-gray-400 line-through text-sm">$29.99</span>
+                                <span class="text-2xl font-bold text-primary ml-2">$25.49</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCart('Set de Rodillos', 25.49)"
+                            class="w-full mt-4 bg-secondary text-white py-2 rounded-lg hover:bg-primary transition font-semibold">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promo Banner -->
+    <section class="bg-primary py-16">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between text-white">
+                <div class="md:w-1/2 mb-6 md:mb-0">
+                    <h2 class="text-4xl font-bold mb-4">¡Ofertas Especiales!</h2>
+                    <p class="text-xl mb-6">Hasta 40% de descuento en herramientas eléctricas</p>
+                    <button
+                        class="bg-white text-primary hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition">
+                        Ver Ofertas
+                    </button>
+                </div>
+                <div class="md:w-1/2 text-center">
+                    <div class="inline-block bg-white/20 backdrop-blur-sm p-8 rounded-2xl">
+                        <i class="fas fa-tags text-9xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-secondary mb-4">Suscríbete a Nuestro Newsletter</h2>
+                <p class="text-gray-600 mb-6">Recibe ofertas exclusivas y novedades directo en tu correo</p>
+                <div class="flex gap-2">
+                    <input type="email" placeholder="Tu correo electrónico"
+                        class="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary">
+                    <button
+                        class="bg-primary text-white px-8 py-3 rounded-lg hover:bg-red-700 transition font-semibold">
+                        Suscribirse
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-secondary text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- About -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-primary">Ferretería El Martillo</h3>
+                    <p class="text-gray-300 mb-4">Tu ferretería de confianza en Panamá. Más de 20 años ofreciendo
+                        calidad y servicio.</p>
+                    <div class="flex gap-3">
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Enlaces Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition">Sobre Nosotros</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition">Catálogo</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition">Ofertas</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition">Blog</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <!-- Customer Service -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Servicio al Cliente</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition">Mi Cuenta</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition">Seguimiento de Pedido</a>
+                        </li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition">Devoluciones</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition">Preguntas Frecuentes</a>
+                        </li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition">Términos y Condiciones</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contacto</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-primary mt-1 mr-3"></i>
+                            <span>Vía España, Ciudad de Panamá</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone text-primary mr-3"></i>
+                            <span>+507 6000-0000</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-primary mr-3"></i>
+                            <span>ventas@ferreteria.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-clock text-primary mr-3"></i>
+                            <span>Lun - Sáb: 8:00 - 18:00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Footer -->
+            <div class="border-t border-gray-700 pt-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                        © 2024 Ferretería El Martillo. Todos los derechos reservados.
+                    </p>
+                    <div class="flex gap-4">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 32'%3E%3Crect fill='%23FFF' width='48' height='32' rx='4'/%3E%3Ctext x='24' y='20' font-size='10' text-anchor='middle' fill='%23333'%3EVISA%3C/text%3E%3C/svg%3E"
+                            alt="Visa" class="h-8">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 32'%3E%3Crect fill='%23FFF' width='48' height='32' rx='4'/%3E%3Ccircle cx='18' cy='16' r='8' fill='%23EB001B'/%3E%3Ccircle cx='30' cy='16' r='8' fill='%23F79E1B'/%3E%3C/svg%3E"
+                            alt="Mastercard" class="h-8">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 32'%3E%3Crect fill='%230070BA' width='48' height='32' rx='4'/%3E%3Ctext x='24' y='20' font-size='8' text-anchor='middle' fill='%23FFF' font-weight='bold'%3EPayPal%3C/text%3E%3C/svg%3E"
+                            alt="PayPal" class="h-8">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Sidebar -->
+    <div id="cartSidebar"
+        class="fixed top-0 right-0 h-full w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 z-50 flex flex-col">
+        <div class="p-6 border-b flex justify-between items-center bg-secondary text-white">
+            <h3 class="text-xl font-bold">Carrito de Compras</h3>
+            <button onclick="toggleCart()" class="text-2xl hover:text-primary transition">&times;</button>
+        </div>
+
+        <div id="cartItems" class="flex-1 overflow-y-auto p-6">
+            <p class="text-gray-500 text-center py-8">Tu carrito está vacío</p>
+        </div>
+
+        <div class="border-t p-6 bg-gray-50">
+            <div class="flex justify-between mb-4 text-lg font-semibold">
+                <span>Subtotal:</span>
+                <span id="cartTotal" class="text-primary">$0.00</span>
+            </div>
+            <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-red-700 transition font-semibold mb-2">
+                Proceder al Pago
+            </button>
+            <button onclick="toggleCart()"
+                class="w-full bg-secondary text-white py-3 rounded-lg hover:bg-gray-700 transition">
+                Continuar Comprando
+            </button>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div id="cartOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden" onclick="toggleCart()"></div>
+
+    <script>
+        let cart = [];
+
+        function toggleCart() {
+            const sidebar = document.getElementById('cartSidebar');
+            const overlay = document.getElementById('cartOverlay');
+            sidebar.classList.toggle('translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCart();
+            toggleCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            const cartTotal = document.getElementById('cartTotal');
+
+            cartCount.textContent = cart.length;
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="text-gray-500 text-center py-8">Tu carrito está vacío</p>';
+                cartTotal.textContent = '$0.00';
+                return;
+            }
+
+            let total = 0;
+            cartItems.innerHTML = cart.map((item, index) => {
+                total += item.price;
+                return `
+                    <div class="flex items-center gap-4 mb-4 pb-4 border-b">
+                        <div class="w-16 h-16 bg-gray-100 rounded flex items-center justify-center">
+                            <i class="fas fa-box text-2xl text-gray-400"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-secondary">${item.name}</h4>
+                            <p class="text-primary font-bold">$${item.price.toFixed(2)}</p>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            }).join('');
+
+            cartTotal.textContent = `$${total.toFixed(2)}`;
+        }
+    </script>
+</body>
+
+</html>
