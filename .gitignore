@@ -21,8 +21,10 @@
 !/storage/uploads/.gitkeep
 !/public/uploads/.gitkeep
 
-# Archivos SQL (dumps de base de datos)
+# Archivos SQL (dumps de base de datos) - pero sí versionar las migraciones
+# nuevas en database/migrations/, esas son código, no dumps
 *.sql
+!/database/migrations/*.sql
 
 # Archivos Excel/datos
 *.xlsx
@@ -51,7 +53,6 @@ Desktop.ini
 *.phpunit.result.cache
 .phpunit.cache/
 phpstan.neon
-phpunit.xml
 
 # Composer
 composer.phar
