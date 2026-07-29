@@ -25,13 +25,14 @@ class HomeController
              ORDER BY sort_order ASC, name ASC'
         );
 
-        // Get featured products (active and is_featured = 1, limited to 8)
+        // Get featured products (active, with a real image; is_featured products
+        // ranked first, but not required - most currently have no image assigned)
         $featured_products = $this->db->fetchAll(
-            'SELECT p.*, c.name as category_name 
+            'SELECT p.*, c.name as category_name
              FROM products p
              LEFT JOIN categories c ON p.category_id = c.id
-             WHERE p.status = "active" AND p.is_featured = 1
-             ORDER BY p.created_at DESC
+             WHERE p.status = "active" AND p.featured_image IS NOT NULL AND p.featured_image <> ""
+             ORDER BY p.is_featured DESC, p.created_at DESC
              LIMIT 8'
         );
 
