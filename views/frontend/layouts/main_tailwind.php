@@ -211,7 +211,7 @@ try {
                 <div class="hidden lg:flex items-center gap-4 text-gray-300">
                     <a href="#" class="hover:text-accent transition"><i class="fab fa-facebook"></i></a>
                     <a href="#" class="hover:text-accent transition"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="hover:text-accent transition"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://wa.me/50765661892" target="_blank" rel="noopener" class="hover:text-accent transition"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
         </nav>
@@ -289,7 +289,7 @@ try {
                         <a href="#" class="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary hover:scale-110 transition">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#" class="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary hover:scale-110 transition">
+                        <a href="https://wa.me/50765661892" target="_blank" rel="noopener" class="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary hover:scale-110 transition">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
@@ -340,6 +340,13 @@ try {
             </div>
         </div>
     </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/50765661892" target="_blank" rel="noopener"
+        aria-label="Escríbenos por WhatsApp"
+        class="fixed bottom-6 left-6 w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:scale-110 transition flex items-center justify-center z-40">
+        <i class="fab fa-whatsapp text-3xl"></i>
+    </a>
 
     <!-- Back to top -->
     <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"
