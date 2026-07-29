@@ -72,13 +72,14 @@ ob_start();
     <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-8">Ubicación Casa Matriz</h2>
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.494834722552!2d-79.51702492473893!3d9.018082191038073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8faca8f1dbe80363%3A0xb2c1e6e8f6c8b8e8!2sPanam%C3%A1!5e0!3m2!1ses!2spa!4v1234567890123!5m2!1ses!2spa"
-                width="100%" 
-                height="450" 
-                style="border:0;" 
-                allowfullscreen="" 
-                loading="lazy">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126101.33362954229!2d-79.67743680273443!3d9.002786599999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8faca850e9f4e867%3A0xcd5ba7495933eed2!2sFausto%20Salazar!5e0!3m2!1ses!2spa!4v1785358735594!5m2!1ses!2spa"
+                width="100%"
+                height="450"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin">
             </iframe>
         </div>
     </div>
