@@ -9,6 +9,13 @@ use App\Core\Database\Connection;
  * API). Backed by the existing `audit_logs` table (no dedicated table for
  * this) - counts recent 'login_failed' rows for either the IP or the
  * attempted identifier (email) within a decay window.
+ *
+ * Matches `new_values` by exact string equality against the same
+ * json_encode() output recordFailure() writes, rather than a JSON path
+ * operator (`->>`) - this project's production DB is MariaDB, and JSON path
+ * extraction syntax/support differs enough between MySQL and MariaDB
+ * versions that it's not worth relying on; a plain `=` comparison works
+ * identically on both.
  */
 class LoginThrottle
 {
@@ -33,7 +40,7 @@ class LoginThrottle
         $this->db->insert('audit_logs', [
             'action' => 'login_failed',
             'entity_type' => 'auth',
-            'new_values' => json_encode(['identifier' => $identifier]),
+            'new_values' => $this->encodeIdentifier($identifier),
             'ip_address' => $ip,
             'created_at' => date('Y-m-d H:i:s'),
         ]);
@@ -48,9 +55,9 @@ class LoginThrottle
         $row = $this->db->fetchOne(
             "SELECT MIN(created_at) as oldest FROM audit_logs
              WHERE action = 'login_failed'
-               AND (ip_address = ? OR new_values->>'$.identifier' = ?)
+               AND (ip_address = ? OR new_values = ?)
                AND created_at > (NOW() - INTERVAL {$this->decayMinutes} MINUTE)",
-            [$ip, $identifier]
+            [$ip, $this->encodeIdentifier($identifier)]
         );
 
         if (empty($row['oldest'])) {
@@ -66,11 +73,16 @@ class LoginThrottle
         $row = $this->db->fetchOne(
             "SELECT COUNT(*) as count FROM audit_logs
              WHERE action = 'login_failed'
-               AND (ip_address = ? OR new_values->>'$.identifier' = ?)
+               AND (ip_address = ? OR new_values = ?)
                AND created_at > (NOW() - INTERVAL {$this->decayMinutes} MINUTE)",
-            [$ip, $identifier]
+            [$ip, $this->encodeIdentifier($identifier)]
         );
 
         return (int) ($row['count'] ?? 0);
+    }
+
+    private function encodeIdentifier(string $identifier): string
+    {
+        return json_encode(['identifier' => $identifier]);
     }
 }
