@@ -162,7 +162,7 @@ $title = 'Inicio - Fausto Salazar, S.A.';
                 <div class="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-xl hover:-translate-y-1 transition-all border border-gray-100">
                     <div class="relative overflow-hidden bg-gray-100 h-64 flex items-center justify-center">
                         <?php if ($product['featured_image']): ?>
-                            <img src="<?= url('uploads/' . $product['featured_image']) ?>" 
+                            <img src="<?= url('uploads/products/' . $product['featured_image']) ?>"
                                  alt="<?= sanitize($product['name']) ?>"
                                  class="w-full h-full object-cover">
                         <?php else: ?>

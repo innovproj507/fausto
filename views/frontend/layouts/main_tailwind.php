@@ -361,7 +361,7 @@ try {
                     <div class="flex items-center gap-4 mb-4 pb-4 border-b">
                         <div class="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
                             <?php if (!empty($item['featured_image'])): ?>
-                                <img src="<?= url('uploads/' . $item['featured_image']) ?>" alt="" class="w-full h-full object-cover">
+                                <img src="<?= url('uploads/products/' . $item['featured_image']) ?>" alt="" class="w-full h-full object-cover">
                             <?php else: ?>
                                 <i class="fas fa-box text-2xl text-gray-400"></i>
                             <?php endif; ?>

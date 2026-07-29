@@ -18,7 +18,7 @@ $title = $product['name'] ?? 'Producto';
             <!-- Product Images -->
             <div class="bg-gray-100 rounded-xl p-8 flex items-center justify-center border border-gray-100">
                 <?php if ($product['featured_image']): ?>
-                    <img src="<?= url('uploads/' . $product['featured_image']) ?>"
+                    <img src="<?= url('uploads/products/' . $product['featured_image']) ?>"
                          alt="<?= sanitize($product['name']) ?>"
                          class="max-w-full h-auto rounded-lg">
                 <?php else: ?>

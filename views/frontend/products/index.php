@@ -46,7 +46,7 @@ $title = 'Productos - Fausto Salazar, S.A.';
                     <a href="<?= url('/products/' . $product['slug']) ?>" class="block">
                         <div class="relative overflow-hidden bg-gray-100 h-64 flex items-center justify-center">
                             <?php if ($product['featured_image']): ?>
-                                <img src="<?= url('uploads/' . $product['featured_image']) ?>"
+                                <img src="<?= url('uploads/products/' . $product['featured_image']) ?>"
                                      alt="<?= sanitize($product['name']) ?>"
                                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                             <?php else: ?>

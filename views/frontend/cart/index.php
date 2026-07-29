@@ -20,7 +20,7 @@ $title = 'Carrito de Compras - Fausto Salazar, S.A.';
                     <div class="flex flex-col sm:flex-row items-center gap-4 p-6 border-b border-gray-100 last:border-b-0">
                         <div class="w-20 h-20 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
                             <?php if (!empty($item['featured_image'])): ?>
-                                <img src="<?= url('uploads/' . $item['featured_image']) ?>"
+                                <img src="<?= url('uploads/products/' . $item['featured_image']) ?>"
                                      alt="<?= sanitize($item['name']) ?>" class="w-full h-full object-cover">
                             <?php else: ?>
                                 <i class="fas fa-box text-3xl text-gray-300"></i>
