@@ -31,13 +31,25 @@ try {
 } catch (\Throwable $e) {
     // Layout must never fatal on a DB hiccup
 }
+
+$storeName = setting('app_name', env('APP_NAME', 'Fausto Salazar, S.A.'));
+$storePhone = setting('contact_phone', env('CONTACT_PHONE', '+507 0000-0000'));
+$storeEmail = setting('contact_email', env('CONTACT_EMAIL', 'ventas@fausto.com'));
+$metaDescription = setting('meta_description', '');
+$facebookUrl = setting('facebook_url') ?: '#';
+$instagramUrl = setting('instagram_url') ?: '#';
+$whatsappNumber = preg_replace('/[^0-9]/', '', setting('whatsapp', '+507 6566-1892'));
+$whatsappUrl = $whatsappNumber ? "https://wa.me/{$whatsappNumber}" : null;
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $title ?? 'Fausto Salazar, S.A.' ?></title>
+    <title><?= $title ?? $storeName ?></title>
+    <?php if ($metaDescription): ?>
+        <meta name="description" content="<?= sanitize($metaDescription) ?>">
+    <?php endif; ?>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -127,12 +139,12 @@ try {
 
                 <!-- Support + Cart -->
                 <div class="flex items-center gap-4 md:gap-6 flex-shrink-0">
-                    <a href="tel:<?= preg_replace('/[^0-9+]/', '', env('CONTACT_PHONE', '+507 0000-0000')) ?>"
+                    <a href="tel:<?= preg_replace('/[^0-9+]/', '', $storePhone) ?>"
                        class="hidden lg:flex items-center gap-3 text-secondary">
                         <i class="fas fa-headset text-3xl text-primary"></i>
                         <span class="leading-tight">
                             <span class="block text-xs text-gray-500">Soporte / Ventas</span>
-                            <span class="block font-bold"><?= env('CONTACT_PHONE', '+507 0000-0000') ?></span>
+                            <span class="block font-bold"><?= sanitize($storePhone) ?></span>
                         </span>
                     </a>
 
@@ -209,9 +221,11 @@ try {
 
                 <!-- Social -->
                 <div class="hidden lg:flex items-center gap-4 text-gray-300">
-                    <a href="#" class="hover:text-accent transition"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="hover:text-accent transition"><i class="fab fa-instagram"></i></a>
-                    <a href="https://wa.me/50765661892" target="_blank" rel="noopener" class="hover:text-accent transition"><i class="fab fa-whatsapp"></i></a>
+                    <a href="<?= sanitize($facebookUrl) ?>" target="_blank" rel="noopener" class="hover:text-accent transition"><i class="fab fa-facebook"></i></a>
+                    <a href="<?= sanitize($instagramUrl) ?>" target="_blank" rel="noopener" class="hover:text-accent transition"><i class="fab fa-instagram"></i></a>
+                    <?php if ($whatsappUrl): ?>
+                        <a href="<?= sanitize($whatsappUrl) ?>" target="_blank" rel="noopener" class="hover:text-accent transition"><i class="fab fa-whatsapp"></i></a>
+                    <?php endif; ?>
                 </div>
             </div>
         </nav>
@@ -275,23 +289,25 @@ try {
                         </li>
                         <li class="flex items-center">
                             <i class="fas fa-phone text-primary mr-3 w-4"></i>
-                            <span><?= env('CONTACT_PHONE', '6566-1892') ?></span>
+                            <span><?= sanitize($storePhone) ?></span>
                         </li>
                         <li class="flex items-center">
                             <i class="fas fa-envelope text-primary mr-3 w-4"></i>
-                            <span><?= env('CONTACT_EMAIL', 'ventas@fausto.com') ?></span>
+                            <span><?= sanitize($storeEmail) ?></span>
                         </li>
                     </ul>
                     <div class="flex gap-3 mt-5">
-                        <a href="#" class="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary hover:scale-110 transition">
+                        <a href="<?= sanitize($facebookUrl) ?>" target="_blank" rel="noopener" class="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary hover:scale-110 transition">
                             <i class="fab fa-facebook"></i>
                         </a>
-                        <a href="#" class="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary hover:scale-110 transition">
+                        <a href="<?= sanitize($instagramUrl) ?>" target="_blank" rel="noopener" class="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary hover:scale-110 transition">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://wa.me/50765661892" target="_blank" rel="noopener" class="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary hover:scale-110 transition">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
+                        <?php if ($whatsappUrl): ?>
+                            <a href="<?= sanitize($whatsappUrl) ?>" target="_blank" rel="noopener" class="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary hover:scale-110 transition">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                        <?php endif; ?>
                     </div>
                 </div>
 
@@ -329,7 +345,7 @@ try {
             <!-- Bottom Footer -->
             <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
                 <p class="text-gray-400 text-sm text-center sm:text-left">
-                    &copy; <?= date('Y') ?> Fausto Salazar, S.A. Todos los derechos reservados.
+                    &copy; <?= date('Y') ?> <?= sanitize($storeName) ?>. Todos los derechos reservados.
                 </p>
                 <div class="flex items-center gap-3 text-2xl text-gray-400">
                     <i class="fab fa-cc-visa"></i>
@@ -342,11 +358,13 @@ try {
     </footer>
 
     <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/50765661892" target="_blank" rel="noopener"
-        aria-label="Escríbenos por WhatsApp"
-        class="fixed bottom-6 left-6 w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:scale-110 transition flex items-center justify-center z-40">
-        <i class="fab fa-whatsapp text-3xl"></i>
-    </a>
+    <?php if ($whatsappUrl): ?>
+        <a href="<?= sanitize($whatsappUrl) ?>" target="_blank" rel="noopener"
+            aria-label="Escríbenos por WhatsApp"
+            class="fixed bottom-6 left-6 w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:scale-110 transition flex items-center justify-center z-40">
+            <i class="fab fa-whatsapp text-3xl"></i>
+        </a>
+    <?php endif; ?>
 
     <!-- Back to top -->
     <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"

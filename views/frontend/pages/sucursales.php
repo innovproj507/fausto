@@ -17,7 +17,7 @@ ob_start();
         <?php
         $sucursales = [
             ['name' => 'Casa Matriz', 'address' => 'Calle 65 Oeste, Panamá', 'phone' => '6566-1892', 'principal' => true],
-            ['name' => 'Tocumen', 'address' => 'Avenida Domingo Díaz, Panamá', 'phone' => '6613-8715'],
+            ['name' => 'Tocumen', 'address' => 'Avenida Domingo Díaz, Panamá', 'phone' => '6613-8715', 'image' => 'images/tocumen.webp'],
             ['name' => 'Santiago', 'address' => 'Avenida Central, Calle 15 A Sur', 'phone' => '6613-9385'],
             ['name' => 'David', 'address' => 'Carretera Interamericana', 'phone' => '6400-0813'],
             ['name' => 'Chorrera', 'address' => 'Calle El Carmen', 'phone' => '6613-9239'],
@@ -32,9 +32,16 @@ ob_start();
         ?>
         <?php foreach ($sucursales as $i => $sucursal): ?>
             <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
-                <div class="h-48 bg-gradient-to-br <?= $colors[$i % count($colors)] ?> flex items-center justify-center">
-                    <i class="fas <?= $sucursal['principal'] ?? false ? 'fa-building' : 'fa-store' ?> text-6xl text-white opacity-80"></i>
-                </div>
+                <?php if (!empty($sucursal['image'])): ?>
+                    <div class="aspect-[1260/848] overflow-hidden">
+                        <img src="<?= asset($sucursal['image']) ?>" alt="Sucursal <?= sanitize($sucursal['name']) ?>"
+                             class="w-full h-full object-cover">
+                    </div>
+                <?php else: ?>
+                    <div class="aspect-[1260/848] bg-gradient-to-br <?= $colors[$i % count($colors)] ?> flex items-center justify-center">
+                        <i class="fas <?= $sucursal['principal'] ?? false ? 'fa-building' : 'fa-store' ?> text-6xl text-white opacity-80"></i>
+                    </div>
+                <?php endif; ?>
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-xl font-bold text-secondary"><?= sanitize($sucursal['name']) ?></h3>
