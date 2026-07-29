@@ -103,6 +103,17 @@ class ProductRepository
     }
 
     /**
+     * Find an active category by slug
+     */
+    public function findCategoryBySlug(string $slug): ?array
+    {
+        return $this->db->fetchOne(
+            'SELECT id, name, slug, description FROM categories WHERE slug = ? AND status = "active"',
+            [$slug]
+        );
+    }
+
+    /**
      * Get featured products
      */
     public function getFeatured(int $limit = 10): array

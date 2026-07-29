@@ -70,19 +70,21 @@ class ProductController
      */
     public function category(Request $request, string $slug): Response
     {
-        // Get category by slug
-        // This would use CategoryRepository
-        $categoryId = 1; // Placeholder
+        $category = $this->repository->findCategoryBySlug($slug);
+
+        if (!$category) {
+            return Response::view('frontend.404', [], 404);
+        }
 
         $page = (int) $request->get('page', 1);
         $products = $this->repository->paginate($page, 20, [
-            'category_id' => $categoryId
+            'category_id' => $category['id']
         ]);
 
         return view('frontend.products.category', [
             'products' => $products['data'],
             'pagination' => $products,
-            'category' => ['name' => 'Category Name'] // Placeholder
+            'category' => $category
         ]);
     }
 }
