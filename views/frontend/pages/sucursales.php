@@ -16,7 +16,7 @@ ob_start();
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <?php
         $sucursales = [
-            ['name' => 'Casa Matriz', 'address' => 'Calle 65 Oeste, Panamá', 'phone' => '6566-1892', 'principal' => true],
+            ['name' => 'Casa Matriz', 'address' => 'Calle 65 Oeste, Panamá', 'phone' => '6566-1892', 'principal' => true, 'image' => 'images/matriz.webp'],
             ['name' => 'Tocumen', 'address' => 'Avenida Domingo Díaz, Panamá', 'phone' => '6613-8715', 'image' => 'images/tocumen.webp'],
             ['name' => 'Santiago', 'address' => 'Avenida Central, Calle 15 A Sur', 'phone' => '6613-9385', 'image' => 'images/santiago.webp'],
             ['name' => 'David', 'address' => 'Carretera Interamericana', 'phone' => '6400-0813', 'image' => 'images/david.webp'],
