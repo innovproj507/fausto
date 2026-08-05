@@ -1,10 +1,41 @@
-<?php 
-ob_start(); 
-$title = $product['name'] ?? 'Producto';
+<?php
+ob_start();
+$title = isset($product['name']) ? $product['name'] . ' - Fausto Salazar, S.A.' : 'Producto';
+
+if (isset($product)) {
+    $metaSource = $product['short_description'] ?: $product['description'] ?: $product['name'];
+    $metaDescription = mb_substr(trim(preg_replace('/\s+/', ' ', strip_tags($metaSource))), 0, 155);
+    $ogImage = $product['featured_image']
+        ? url('uploads/products/' . $product['featured_image'])
+        : asset('logo.png');
+
+    $productSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Product',
+        'name' => $product['name'],
+        'sku' => $product['sku'],
+        'description' => $metaDescription,
+        'image' => $ogImage,
+        'offers' => [
+            '@type' => 'Offer',
+            'url' => url('/products/' . $product['slug']),
+            'priceCurrency' => 'USD',
+            'price' => number_format((float) $product['price'], 2, '.', ''),
+            'availability' => $product['status'] === 'active'
+                ? 'https://schema.org/InStock'
+                : 'https://schema.org/OutOfStock',
+        ],
+    ];
+    if (!empty($product['category_name'])) {
+        $productSchema['category'] = $product['category_name'];
+    }
+}
 ?>
 
 <div class="container mx-auto px-4 py-8">
     <?php if (isset($product)): ?>
+        <script type="application/ld+json"><?= json_encode($productSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
+
         <!-- Breadcrumb -->
         <nav class="text-sm mb-6 flex items-center gap-2 text-gray-500">
             <a href="<?= url('/') ?>" class="hover:text-primary transition">Inicio</a>

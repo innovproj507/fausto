@@ -39,6 +39,9 @@ $router->group(['middleware' => [CsrfProtection::class]], function ($router) {
     // Home page
     $router->get('/', 'App\Domain\Home\HomeController@index');
 
+    // SEO
+    $router->get('/sitemap.xml', 'App\Domain\Seo\SitemapController@index');
+
     // Product routes
     $router->get('/products', 'App\Domain\Product\ProductController@index');
     $router->get('/products/{slug}', 'App\Domain\Product\ProductController@show');
@@ -75,6 +78,7 @@ $router->group(['middleware' => [CsrfProtection::class]], function ($router) {
     });
 
     // Institutional Pages
+    $router->get('/guias/{slug}', 'App\Domain\Pages\PagesController@guia');
     $router->get('/sucursales', 'App\Domain\Pages\PagesController@sucursales');
     $router->get('/nosotros', 'App\Domain\Pages\PagesController@nosotros');
     $router->get('/contacto', 'App\Domain\Pages\PagesController@contacto');

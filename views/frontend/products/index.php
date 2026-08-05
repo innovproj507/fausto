@@ -1,6 +1,12 @@
 <?php
 ob_start();
 $title = 'Productos - Fausto Salazar, S.A.';
+$metaDescription = !empty($search)
+    ? sprintf('Resultados de "%s" en el catálogo de Fausto Salazar, S.A. — ferretería industrial en Panamá.', $search)
+    : 'Catálogo completo de Fausto Salazar, S.A. — más de 9,000 productos de ferretería industrial y construcción en Panamá.';
+// /products?search=&category=&page= is one page filtered many ways — canonicalize to the
+// clean listing URL so search engines don't index every query-string permutation separately.
+$canonicalUrl = url('/products');
 ?>
 
 <!-- Page Header -->

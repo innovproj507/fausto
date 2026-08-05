@@ -35,7 +35,12 @@ try {
 $storeName = setting('app_name', env('APP_NAME', 'Fausto Salazar, S.A.'));
 $storePhone = setting('contact_phone', env('CONTACT_PHONE', '+507 0000-0000'));
 $storeEmail = setting('contact_email', env('CONTACT_EMAIL', 'ventas@fausto.com'));
-$metaDescription = setting('meta_description', '');
+// A view can set $metaDescription/$canonicalUrl/$ogImage before including this layout to
+// override the site-wide defaults (e.g. a product's own description/image) — only fall back
+// to the generic settings-driven value when the view didn't already provide one.
+$metaDescription = $metaDescription ?? setting('meta_description', '');
+$canonicalUrl = $canonicalUrl ?? url(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH));
+$ogImage = $ogImage ?? asset('logo.png');
 $facebookUrl = setting('facebook_url') ?: '#';
 $instagramUrl = setting('instagram_url') ?: '#';
 $whatsappNumber = preg_replace('/[^0-9]/', '', setting('whatsapp', '+507 6566-1892'));
@@ -50,29 +55,20 @@ $whatsappUrl = $whatsappNumber ? "https://wa.me/{$whatsappNumber}" : null;
     <?php if ($metaDescription): ?>
         <meta name="description" content="<?= sanitize($metaDescription) ?>">
     <?php endif; ?>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="canonical" href="<?= sanitize($canonicalUrl) ?>">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="<?= sanitize($storeName) ?>">
+    <meta property="og:title" content="<?= sanitize($title ?? $storeName) ?>">
+    <meta property="og:url" content="<?= sanitize($canonicalUrl) ?>">
+    <meta property="og:image" content="<?= sanitize($ogImage) ?>">
+    <?php if ($metaDescription): ?>
+        <meta property="og:description" content="<?= sanitize($metaDescription) ?>">
+    <?php endif; ?>
+    <link rel="stylesheet" href="<?= asset('css/app.css') ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#ed1c24',
-                        'primary-dark': '#b8141a',
-                        secondary: '#1F2937',
-                        accent: '#f5a623'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-                        display: ['"Barlow Condensed"', 'ui-sans-serif', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
     <style>
         body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
         ::selection { background: #ed1c24; color: #fff; }

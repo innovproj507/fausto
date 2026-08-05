@@ -1,6 +1,9 @@
 <?php
 ob_start();
 $title = sanitize($category['name']) . ' - Fausto Salazar, S.A.';
+$metaDescription = $category['description']
+    ? mb_substr(trim(preg_replace('/\s+/', ' ', strip_tags($category['description']))), 0, 155)
+    : sprintf('Catálogo de %s en Fausto Salazar, S.A. — ferretería industrial en Panamá.', $category['name']);
 ?>
 
 <!-- Page Header -->

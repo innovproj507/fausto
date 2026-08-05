@@ -1,0 +1,29 @@
+{
+  "name": "fausto",
+  "version": "1.0.0",
+  "description": "![PHP Version](https://img.shields.io/badge/PHP-8.1%2B-blue)\r ![License](https://img.shields.io/badge/license-MIT-green)",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "tailwindcss -i ./resources/css/app.css -o ./public/assets/css/app.css --minify",
+    "watch:css": "tailwindcss -i ./resources/css/app.css -o ./public/assets/css/app.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/innovproj507/fausto.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/innovproj507/fausto/issues"
+  },
+  "homepage": "https://github.com/innovproj507/fausto#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  }
+}
